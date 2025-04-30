@@ -89,3 +89,68 @@ header {
     top: 50%;
     animation: float 3s ease-in-out infinite;
 }
+
+.content-block {
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: slideInRight 1s ease-out forwards;
+}
+
+.content-block:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.content-block:nth-child(2) {
+    animation-delay: 0.6s;
+}
+
+.content-block-title {
+    font-size: 18px;
+    color: #aaa;
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.content-block-title::before {
+    content: "";
+    display: block;
+    width: 6px;
+    height: 20px;
+    background-color: #ff3d2e;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.content-block-text {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #aaa;
+    letter-spacing: 2px
+}
+
+
+
+/* Enhanced Feedback Button with Hologram Effect */
+.feedback-button-img {
+    display: inline-block;
+    position: relative;
+    margin-top: 30px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.feedback-image {
+    max-width: 100%;
+    height: auto;
+}
+
+.feedback-button-img:hover {
+    transform: translateY(-5px) scale(1.05);
+    filter: brightness(1.2);
+}
+
+.feedback-button-img:active {
+    transform: translateY(0) scale(0.98);
+}
