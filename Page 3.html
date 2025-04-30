@@ -1,0 +1,102 @@
+<body>
+    <section class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <video autoplay muted loop preload="auto" playsinline>
+                    <source src="video files/home_game_1.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="content-block">
+                    <h1>NEWLY UPGRADED SEASON：<br>IGNITION</h1>
+                    <hr>
+                    <p>The new Northridge map, multiple weapons such as the AK-12,  and enhanced combat modes—including SOLO OPS, Secure Ops, Team Deathmatch, and Team Elimination—are arriving. Plus, four new bosses that are lying in wait to test your tactical prowess and survival skills. Search Northridge for the Northridge Hotel occupied by Fred's Squad and uncover the buried secrets of Northridge. So, how will you seize victory in the Dark Zone? Download now and jump into the action!</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <video autoplay muted loop preload="auto" playsinline>
+                    <source src="video files/home_game_2.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="content-block">
+                    <h1>TACTICAL EXTRACTION</h1>
+                    <hr>
+                    <p>This is an ultimate game of strategy and tactics. Before entering the Dark Zone, be sure to bring the most suitable gear. Every decision is extremely important. To win, you must not only defeat your enemies but also work hard to extract successfully. Whether you choose to fight head-on or sneak and hide, there is only one goal, and that is to break out and win!</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <video autoplay muted loop preload="auto" playsinline>
+                    <source src="video files/home_game_3.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="content-block">
+                    <h1>IMMERSIVE WARFARE</h1>
+                    <hr>
+                    <p>Breach and immerse yourself in the Dark Zone. Dive into a world built with exceptional detail, from real-time lighting to 360° spatial sound effects that bring every pull of the trigger to life. Choose your gear and pick your fights. As long as you survive, each raid is a victory. Load up with everything you need or stay light on your feet. The choice is yours.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <video autoplay muted loop>
+                    <source src="video files/home_game_4.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="content-block">
+                    <h1>GUNSMITH CUSTOMIZATION</h1>
+                    <hr>
+                    <p>Modify your firearm of choice with the ultimate gunsmith system. Mix and match over 800 weapon mods on over 20 attachment slots to create your ultimate weapon. All modifications are based on the principles of real firearm design, dedicated to providing players with a more immersive and authentic experience.</p>
+                </div>
+            </div>
+            <div class="swiper-slide">
+                <video autoplay muted loop>
+                    <source src="video files/home_game_5.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="content-block">
+                    <h1>READY UP AND GO</h1>
+                    <hr>
+                    <p>Arena Breakout: Infinite has always been committed to providing players with great QoL features. In this game, in addition to offering quick equipment setup option, we continuously update and add a variety of convenience features, including quick healing and killcam, to ensure players can fully immerse themselves in this endless and thrilling adventure.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Navigation buttons -->
+        <div class="swiper-button-next">Next</div>
+        <div class="swiper-button-prev">Previous</div>
+        <!-- Progress bar -->
+        <div class="swiper-pagination"></div>
+    </section>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        
+        const swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 300,
+            loop: true, // Enable looping
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: false, // Make the progress bar non-clickable
+            },
+            effect: 'slide', // Slide effect
+            speed: 500, // Transition speed in milliseconds
+            on: {
+                init: function () {
+                    const activeSlide = document.querySelector('.swiper-slide-active .content-block');
+                    if (activeSlide) {
+                        activeSlide.classList.add('active');
+                    }
+                },
+                slideChangeTransitionEnd: function () {
+                    document.querySelectorAll('.content-block').forEach(block => {
+                        block.classList.remove('active');
+                    });
+                    const activeSlide = document.querySelector('.swiper-slide-active .content-block');
+                    if (activeSlide) {
+                        activeSlide.classList.add('active');
+                    }
+                }
+            }
+        });
+    </script>
+</body>
