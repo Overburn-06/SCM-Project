@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    letter-spacing: 3px
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 100%;
+    position: relative;
+}
+
+.bebas-neue-regular {
+    font-family: "Bebas Neue", sans-serif;
+    font-weight: 200;
+    font-style: normal;
+  }
+  
+/* Header/Navigation - Hidden */
+header {
+    display: none;
+}
+
+/* Main Content */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url('https://www.arenabreakoutinfinite.com/img/index/service-bg.jpg') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.soldier-image {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 60%;
+    height: 100%;
+    z-index: 1;
+    opacity: 0.7;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.content-section {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    padding: 0 50px;
+    z-index: 2;
+    animation: fadeIn 1.2s ease-in-out;
+}
+
+.section-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    position: relative;
+    color: rgba(255, 255, 255, 0.493);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.537);
+    margin-top: 10px;
+}
+
+.section-title::before {
+    content: "";
+    display: block;
+    width: 20px;
+    height: 3px;
+    /* background-color: #ff3d2e; */
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    animation: float 3s ease-in-out infinite;
+}
