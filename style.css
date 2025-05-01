@@ -233,6 +233,14 @@ body, .page {
     transition: all 0.3s cubic-bezier(.4,0,.2,1);
 }
 
+.page .nav .nav-item.active,
+.page .nav .nav-item.active a {
+    color: #fff;
+    font-weight: bold;
+    filter: brightness(1.05);
+    text-shadow: 0 0 8px #fff, 0 0 2px #fff;
+}
+
 .version-update {
     position: fixed;
     top: 80px; /* Adjust if your navbar height is different */
