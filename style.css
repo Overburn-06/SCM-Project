@@ -137,7 +137,7 @@ body, .page {
     position: absolute; /* Position relative to the page */
     top: calc(50% + 30%); /* Place it slightly below the banner */
     left: 50%; /* Center it horizontally */
-    transform: translate(-50%, 0); /* Center the element */
+    transform: translate(-50%, 0) scale(1); /* Center the element */
     z-index: 1; /* Ensure it appears above the video background */
     text-align: center; /* Center-align the content inside the button */
     background: none; /* Remove background */
@@ -148,7 +148,28 @@ body, .page {
     cursor: pointer; /* Add a pointer cursor for interactivity */
     background-image: url(Assests/photos/download-act.png);
     font-family: 'Refrigerator Deluxe', Arial, sans-serif;
-    color:black
+    color:black;
+    transition: transform 0.15s cubic-bezier(.4,0,.2,1);
+}
+
+.page .download-btn:hover {
+    transform: translate(-50%, 0) scale(1.08);
+}
+
+.page .download-btn:active {
+    animation: download-btn-click 0.18s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes download-btn-click {
+    0% {
+        transform: translate(-50%, 0) scale(1.08);
+    }
+    40% {
+        transform: translate(-50%, 0) scale(0.96);
+    }
+    100% {
+        transform: translate(-50%, 0) scale(1.08);
+    }
 }
 
 .page .social-bar {
