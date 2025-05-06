@@ -1,0 +1,274 @@
+@font-face {
+    font-family: 'Refrigerator Deluxe';
+    src: url('Assests/Fonts/RefrigeratorDeluxe-regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body, .page {
+    font-family: 'Refrigerator Deluxe', Arial, sans-serif;
+}
+
+.page{
+    padding: 0;
+    margin: 0;
+}
+
+.page .header {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out logo, nav, and header-right */
+    height: 0.69em;
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    color: rgb(155, 155, 155);
+    font-size: clamp(50px, 3.90625vw, 100px);
+    z-index: 10;
+}
+
+.page .logo{
+    width: 2.8em;
+    height: 0.7em;
+    padding-top: 0.07em;
+    box-sizing: border-box;
+    font-size: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0px
+}
+
+.page .logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Invert colors for better visibility */
+}
+
+.page .header-right {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: flex-end; /* Align items to the right */
+    flex: 1; /* Allow it to take up remaining space */
+}
+
+.page .nav {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+    justify-content: center; /* Center items horizontally */
+    align-items: center; /* Center items vertically */
+    flex: 1; /* Allow it to take up space between logo and header-right */
+}
+
+.page .nav .nav-item {
+    min-width: 1.2em;
+    box-sizing: border-box;
+    height: 0.69em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(203, 203, 203);
+    padding: 0px 0.2em;
+    text-decoration: none;
+    font-size: 0.5em;
+    margin-right: 0.5em;
+    cursor: pointer;
+}
+
+.page .nav .nav-item a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.page .nav .nav-item:hover {
+    color: white;
+}
+
+.page .nav .nav-item:last-child {
+    margin-right: 0; /* Remove margin from the last item */
+}
+
+.page .header-right .music-btn {
+    width: 48px;
+    height: 48px;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.page .header-right .music-btn svg,
+.page .header-right .music-btn img {
+    width: 36px;
+    height: 36px;
+}
+
+.page video {
+    position: fixed; /* Fix the video to the viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Make the video cover the full width */
+    height: 100%; /* Make the video cover the full height */
+    object-fit: cover; /* Ensure the video covers the area without distortion */
+    z-index: -1; /* Place the video behind other content */
+    pointer-events: none; /* Prevent the video from interfering with user interactions */
+}
+
+.page .banner {
+    position: absolute; /* Position relative to the page */
+    top: 50%; /* Start at the vertical center */
+    left: 50%; /* Start at the horizontal center */
+    transform: translate(-50%, -10%) scale(0.8); /* Center the element and scale it down to 80% */
+    z-index: 1; /* Ensure it appears above the video background */
+    text-align: center; /* Center-align the content inside the banner */
+    padding-bottom: 20px;
+}
+
+.page .download-btn {
+    position: absolute; /* Position relative to the page */
+    top: calc(50% + 30%); /* Place it slightly below the banner */
+    left: 50%; /* Center it horizontally */
+    transform: translate(-50%, 0) scale(1); /* Center the element */
+    z-index: 1; /* Ensure it appears above the video background */
+    text-align: center; /* Center-align the content inside the button */
+    background: none; /* Remove background */
+    border: none; /* Remove border */
+    outline: none; /* Remove outline */
+    font-size: 2em; /* Make the text bigger */
+    color: rgb(203, 203, 203); /* Keep the text color */
+    cursor: pointer; /* Add a pointer cursor for interactivity */
+    background-image: url(Assests/photos/download-act.png);
+    font-family: 'Refrigerator Deluxe', Arial, sans-serif;
+    color:black;
+    transition: transform 0.15s cubic-bezier(.4,0,.2,1);
+}
+
+.page .download-btn:hover {
+    transform: translate(-50%, 0) scale(1.08);
+}
+
+.page .download-btn:active {
+    animation: download-btn-click 0.18s cubic-bezier(.4,0,.2,1);
+}
+
+@keyframes download-btn-click {
+    0% {
+        transform: translate(-50%, 0) scale(1.08);
+    }
+    40% {
+        transform: translate(-50%, 0) scale(0.96);
+    }
+    100% {
+        transform: translate(-50%, 0) scale(1.08);
+    }
+}
+
+.page .social-bar {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    display: flex;
+    flex-direction: row;
+    gap: 15px; /* Reduced gap between icons */
+    z-index: 2;
+    align-items: center;
+}
+
+.page .social-bar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+}
+
+.page .social-bar ul li {
+    display: flex;
+    align-items: center;
+}
+
+.page .social-bar .social-item {
+    width: 32px; /* Increased from 24px */
+    height: 32px; /* Increased from 24px */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.page .social-bar .social-item svg {
+    width: 100%;
+    height: 100%;
+    fill: rgb(203, 203, 203); /* Change color to match other elements */
+}
+
+.page .social-bar .social-item:hover {
+    opacity: 1;
+}
+
+.page .nav .nav-item,
+.page .nav .nav-item a {
+    position: relative;
+    transition: color 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* Underline on hover and active */
+.page .nav .nav-item:hover::after,
+.page .nav .nav-item.active::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: -0.2em;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    opacity: 0.9;
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+/* Hide underline by default */
+.page .nav .nav-item::after {
+    content: "";
+    display: block;
+    position: absolute;
+    left: 20%;
+    right: 20%;
+    bottom: -0.2em;
+    height: 3px;
+    background: white;
+    border-radius: 2px;
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+
+.page .nav .nav-item.active,
+.page .nav .nav-item.active a {
+    color: #fff;
+    font-weight: bold;
+    filter: brightness(1.05);
+    text-shadow: 0 0 8px #fff, 0 0 2px #fff;
+}
+
+.version-update {
+    position: fixed;
+    top: 80px; /* Adjust if your navbar height is different */
+    right: 40px; /* Space from the right edge */
+    z-index: 11; /* Above background, below modal/dialogs if any */
+    width: auto;
+    max-width: 300px; /* Adjust as needed */
+    height: auto;
+    display: block;
+}

@@ -1,0 +1,408 @@
+:root {
+    --accent-color: #f96632;
+    --accent-color-hover: #ff7a4c;
+    --text-color: #fff;
+    --bg-dark: #121212;
+    --overlay-dark: rgba(0, 0, 0, 0.7);
+    --overlay-gradient: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.2), transparent);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Industry', 'Rajdhani', 'Arial', sans-serif;
+    background-color: #000;
+    color: var(--text-color);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+/* Main container */
+.game-container {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Background elements */
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: opacity 1s ease-in-out;
+    z-index: -1;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--overlay-gradient);
+    z-index: -1;
+}
+
+/* Header section */
+.header {
+    padding: 2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    z-index: 10;
+}
+
+.header-title {
+    position: relative;
+}
+
+.header-title h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    position: relative;
+}
+
+.header-title h2::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--accent-color);
+}
+
+.header-tabs {
+    display: flex;
+    align-items: center;
+}
+
+.tab-btn {
+    color: var(--text-color);
+    padding: 5px 15px;
+    margin: 0 10px;
+    border: none;
+    background: transparent;
+    position: relative;
+    letter-spacing: 1px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    color: var(--accent-color);
+}
+
+.tab-btn.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--accent-color);
+}
+
+.tab-more {
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.tab-more i {
+    color: var(--accent-color);
+    margin-left: 5px;
+    font-size: 0.9rem;
+}
+
+/* Content area */
+.content-area {
+    position: absolute;
+    bottom: 30%;
+    left: 0;
+    width: 100%;
+    padding: 0 4rem;
+    z-index: 10;
+}
+
+.content-title {
+    font-size: 4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.7);
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.content-description {
+    max-width: 600px;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+/* Carousel section */
+.carousel-section {
+    position: absolute;
+    bottom: 5%;
+    left: 0;
+    width: 100%;
+    padding: 0 4rem;
+    z-index: 20;
+}
+
+.counter-display {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.counter-current {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.counter-total {
+    opacity: 0.6;
+    font-size: 1rem;
+}
+
+.carousel-wrapper {
+    position: relative;
+}
+
+.carousel-main {
+    position: relative;
+    overflow: hidden;
+}
+
+.carousel-slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    gap: 15px;
+}
+
+.carousel-slide {
+    flex: 0 0 180px;
+    height: 100px;
+    border: 2px solid transparent;
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.carousel-slide.active {
+    border-color: var(--accent-color);
+}
+
+.carousel-slide:hover img {
+    transform: scale(1.1);
+}
+
+.slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 10px;
+    background: var(--overlay-dark);
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.carousel-controls {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 -20px;
+    pointer-events: none;
+}
+
+.carousel-btn {
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--text-color);
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    pointer-events: auto;
+    z-index: 30;
+}
+
+.carousel-btn:hover {
+    background: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.carousel-pagination {
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+    padding: 3px 15px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 15px;
+    font-size: 0.8rem;
+}
+
+/* Side indicators */
+.side-indicators {
+    position: fixed;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    z-index: 30;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.indicator.active {
+    background: var(--accent-color);
+    transform: scale(1.2);
+}
+
+/* Responsive styles */
+@media (max-width: 992px) {
+    .header, .content-area, .carousel-section {
+        padding: 0 2rem;
+    }
+    
+    .content-title {
+        font-size: 3rem;
+    }
+    
+    .content-description {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-title {
+        font-size: 2.5rem;
+    }
+    
+    .carousel-slide {
+        flex: 0 0 150px;
+        height: 85px;
+    }
+    
+    .side-indicators {
+        right: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .header, .content-area, .carousel-section {
+        padding: 0 1rem;
+    }
+    
+    .content-title {
+        font-size: 2rem;
+    }
+    
+    .content-area {
+        bottom: 35%;
+    }
+    
+    .carousel-slide {
+        flex: 0 0 120px;
+        height: 70px;
+    }
+    
+    .header-title h2 {
+        font-size: 1.2rem;
+    }
+    
+    .tab-btn {
+        padding: 5px 10px;
+        margin: 0 5px;
+        font-size: 0.8rem;
+    }
+}
+
+/* Animation classes */
+.fade-in {
+    animation: fadeIn 1s forwards;
+}
+
+.fade-out {
+    animation: fadeOut 0.5s forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.8s forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes slideUp {
+    from { 
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to { 
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Last updated: 5.05.25 */
+/* This CSS file is designed for a gaming website, providing a modern and sleek design with a focus on user experience. The use of variables allows for easy customization of colors and styles. The layout is responsive, ensuring compatibility across various devices. The animations enhance the visual appeal, making the site more engaging for users. */
+/* The design incorporates a dark theme with accent colors for buttons and highlights, creating a visually striking contrast. The carousel section is interactive, allowing users to navigate through game images seamlessly. Overall, this CSS file serves as a foundation for a dynamic and user-friendly gaming website. */
