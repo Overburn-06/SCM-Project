@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arena Breakout Infinite - New Season Sneak Peek</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <!-- Add Owl Carousel CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link href="index.css" rel="stylesheet">
+    <style>
+        /* Game container with flex layout */
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Content area with flex-grow to push carousel to bottom */
+        .main-content {
+            flex-grow: 1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Carousel section at bottom */
+        .carousel-section {
+            position: relative;
+            width: 100%;
+            margin-top: auto;
+            padding: 20px 0;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 2;
+        }
+        
+        .owl-carousel .carousel-slide {
+            padding: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .owl-carousel .carousel-slide img {
+            width: 100%;
+            height: 120px; /* Even smaller height for bottom position */
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        
+        .carousel-controls {
+            position: absolute;
+            z-index: 10;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            padding: 0 15px;
+        }
+        
+        .carousel-btn {
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .carousel-btn:hover {
+            background: rgba(0, 0, 0, 0.8);
+        }
+        
+        .slide-caption {
+            color: white;
+            text-align: center;
+            padding: 5px 0;
+            font-size: 14px;
+        }
+        
+        /* Active slide styles */
+        .owl-item.center .carousel-slide {
+            transform: scale(1.1);
+            z-index: 1;
+        }
+        
+        /* Counter display */
+        .counter-display {
+            position: absolute;
+            top: -30px;
+            right: 20px;
+            color: white;
+            font-size: 14px;
+            z-index: 3;
+        }
+        
+        /* Background elements */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            transition: opacity 1s;
+        }
+        
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        /* Header styles */
+        .header {
+            padding: 20px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .header-tabs {
+            display: flex;
+            align-items: center;
+        }
+        
+        .tab-btn {
+            background: transparent;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+        
+        .tab-btn.active {
+            border-bottom: 2px solid white;
+            font-weight: bold;
+        }
+        
+        .tab-more {
+            color: white;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        /* Content area */
+        .content-area {
+            padding: 40px 20px;
+            color: white;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content-title {
+            font-size: 48px;
+            margin-bottom: 20px;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        .content-description {
+            font-size: 18px;
+            line-height: 1.6;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+        
+        /* Animation classes */
+        .fade-in {
+            animation: fadeIn 1s forwards;
+        }
+        
+        .fade-out {
+            opacity: 0;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.8s forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Side indicators */
+        .side-indicators {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            z-index: 10;
+        }
+        
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.5);
+            margin: 5px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .indicator.active {
+            background: white;
+            transform: scale(1.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- Background Image -->
+        <div class="bg-image" style="background-image: url('/api/placeholder/1920/1080'); opacity: 1;"></div>
+        <div class="bg-overlay"></div>
+        
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Header Section -->
+            <div class="header">
+                <div class="header-title">
+                    <h2>NEW SEASON SNEAK PEEK</h2>
+                </div>
+                <div class="header-tabs">
+                    <button class="tab-btn active" data-tab="events">EVENTS</button>
+                    <div class="tab-more">
+                        MORE <i class="bi bi-plus"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Area -->
+            <div class="content-area">
+                <h1 class="content-title fade-in">The New Northridge Map</h1>
+                <p class="content-description slide-up">Explore treacherous mountain terrain and strategic pathways in this breathtaking new combat zone. Master high ground advantages and discover hidden caches.</p>
+            </div>
+            
+            <!-- Side Indicators -->
+            <div class="side-indicators">
+                <div class="indicator active" data-id="1"></div>
+                <div class="indicator" data-id="2"></div>
+                <div class="indicator" data-id="3"></div>
+                <div class="indicator" data-id="4"></div>
+            </div>
+        </div>
+        
+        <!-- Carousel Section at Bottom -->
+        <div class="carousel-section">
+            <div class="counter-display">
+                <span class="counter-current">01</span>
+                <span> / </span>
+                <span class="counter-total">06</span>
+            </div>
+            
+            <div class="carousel-wrapper">
+                <div class="carousel-controls">
+                    <button class="carousel-btn prev-btn">
+                        <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button class="carousel-btn next-btn">
+                        <i class="bi bi-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="carousel-main">
+                    <div class="owl-carousel owl-theme">
+                        <div class="carousel-slide" data-id="1" data-title="The New Northridge Map">
+                            <img src="images/WhatsApp Image 2025-04-27 at 3.07.45 PM.jpeg" alt="The New Northridge Map">
+                            <div class="slide-caption">The New Northridge Map</div>
+                        </div>
+                        <div class="carousel-slide" data-id="2" data-title="New Weapons">
+                            <img src="images/WhatsApp Image 2025-04-27 at 3.07.45 PM.jpeg" alt="New Weapons">
+                            <div class="slide-caption">New Weapons</div>
+                        </div>
+                        <div class="carousel-slide" data-id="3" data-title="New Bosses & Gameplay">
+                            <img src="images/WhatsApp Image 2025-04-27 at 3.07.46 PM.jpeg" alt="New Bosses">
+                            <div class="slide-caption">New Bosses</div>
+                        </div>
+                        <div class="carousel-slide" data-id="4" data-title="Character Selection">
+                            <img src="images/WhatsApp Image 2025-04-27 at 3.07.47 PM.jpeg" alt="Character Selection">
+                            <div class="slide-caption">Character Selection</div>
+                        </div>
+                        <div class="carousel-slide" data-id="5" data-title="Weapon Arsenal">
+                            <img src="images/WhatsApp Image 2025-04-27 at 3.07.48 PM (1).jpeg" alt="Weapon Arsenal">
+                            <div class="slide-caption">Weapon Arsenal</div>
+                        </div>
+                        <div class="carousel-slide" data-id="6" data-title="Game Modes">
+                            <img src="images/WhatsApp Image 2025-04-27 at 3.07.48 PM.jpeg" alt="Game Modes">
+                            <div class="slide-caption">Game Modes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Add jQuery and Owl Carousel JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <script>
+       $(document).ready(function() {
+    // Track carousel complete iterations
+    let completedIterations = 0;
+    const maxIterations = 6;
+    
+    // Initialize Owl Carousel with specific options for smaller size
+    const owl = $('.owl-carousel').owlCarousel({
+        center: true,
+        items: 7,      // Show more items for bottom position
+        margin: 10,    // Smaller margin between items
+        nav: false,    // Hide default nav
+        dots: false,   // Hide dots
+        autoWidth: false,
+        loop: true,    // Start with loop enabled
+        responsive: {
+            0: {
+                items: 1
+            },
+            576: {
+                items: 3
+            },
+            768: {
+                items: 5
+            },
+            992: {
+                items: 7
+            }
+        }
+    });
+
+    // Image array with actual image paths
+    const images = [
+        {
+            slideImg: 'images/WhatsApp Image 2025-04-27 at 3.07.45 PM.jpeg',
+            bgImg: 'images/WhatsApp Image 2025-04-27 at 3.07.45 PM.jpeg',
+            title: 'The New Northridge Map',
+            description: 'Explore treacherous mountain terrain and strategic pathways in this breathtaking new combat zone. Master high ground advantages and discover hidden caches.'
+        },
+        {
+            slideImg: 'images/WhatsApp Image 2025-04-27 at 3.07.45 PM.jpeg',
+            bgImg: 'images/WhatsApp Image 2025-04-27 at 3.07.45 PM.jpeg', 
+            title: 'New Weapons',
+            description: 'Arsenal expansion with next-gen tactical firearms. Experience enhanced ballistics, custom attachments, and specialized ammunition types.'
+        },
+        {
+            slideImg: 'images/WhatsApp Image 2025-04-27 at 3.07.46 PM.jpeg',
+            bgImg: 'images/WhatsApp Image 2025-04-27 at 3.07.46 PM.jpeg',
+            title: 'New Bosses & Gameplay',
+            description: 'Face formidable new adversaries with unique attack patterns and valuable loot. Strategic combat required to defeat these challenging opponents.'
+        },
+        {
+            slideImg: 'images/WhatsApp Image 2025-04-27 at 3.07.47 PM.jpeg',
+            bgImg: 'images/WhatsApp Image 2025-04-27 at 3.07.47 PM.jpeg',
+            title: 'Character Selection',
+            description: 'Choose from a roster of specialized operators, each with unique abilities and combat styles to match your preferred playstyle.'
+        },
+        {
+            slideImg: 'images/WhatsApp Image 2025-04-27 at 3.07.48 PM (1).jpeg',
+            bgImg: 'images/WhatsApp Image 2025-04-27 at 3.07.48 PM (1).jpeg',
+            title: 'Weapon Arsenal',
+            description: 'Customize your loadout with a variety of primary and secondary weapons. Unlock attachments and skins as you progress through the game.'
+        },
+        {
+            slideImg: 'images/WhatsApp Image 2025-04-27 at 3.07.48 PM.jpeg',
+            bgImg: 'images/WhatsApp Image 2025-04-27 at 3.07.48 PM.jpeg',
+            title: 'Game Modes',
+            description: 'Fresh gameplay experiences including survival scenarios, tactical team operations, and competitive multiplayer challenges.'
+        }
+    ];
+
+    // Elements
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const counterCurrent = document.querySelector('.counter-current');
+    const counterTotal = document.querySelector('.counter-total');
+    const contentTitle = document.querySelector('.content-title');
+    const contentDescription = document.querySelector('.content-description');
+    let bgImage = document.querySelector('.bg-image');
+    const sideIndicators = document.querySelectorAll('.indicator');
+    
+    let currentIndex = 0;
+    let lastIndex = 0; // Track the last index to detect full rotations
+    const totalSlides = images.length;
+    
+    // Format counter numbers with leading zeros
+    function formatCounter(num) {
+        return num.toString().padStart(2, '0');
+    }
+    
+    // Update UI elements when changing slides
+    function updateUI() {
+        // Update counters
+        const displayIndex = formatCounter(currentIndex + 1);
+        const totalFormatted = formatCounter(totalSlides);
+        
+        counterCurrent.textContent = displayIndex;
+        counterTotal.textContent = totalFormatted;
+        
+        // Update content
+        const imageData = images[currentIndex];
+        
+        // Animate content changes
+        contentTitle.classList.add('fade-out');
+        contentDescription.classList.add('fade-out');
+        
+        setTimeout(() => {
+            contentTitle.textContent = imageData.title;
+            contentDescription.textContent = imageData.description;
+            
+            contentTitle.classList.remove('fade-out');
+            contentDescription.classList.remove('fade-out');
+            contentTitle.classList.add('fade-in');
+            contentDescription.classList.add('slide-up');
+            
+            // Change background with smooth transition
+            const newBgImage = document.createElement('div');
+            newBgImage.className = 'bg-image';
+            newBgImage.style.backgroundImage = `url('${imageData.bgImg}')`;
+            newBgImage.style.opacity = '0';
+            
+            document.querySelector('.game-container').appendChild(newBgImage);
+            
+            setTimeout(() => {
+                newBgImage.style.opacity = '1';
+                setTimeout(() => {
+                    bgImage.remove();
+                    bgImage = newBgImage;
+                }, 1000);
+            }, 50);
+            
+        }, 500);
+        
+        // Update side indicators
+        sideIndicators.forEach((indicator, idx) => {
+            if (idx === Math.min(currentIndex, 3)) {
+                indicator.classList.add('active');
+            } else {
+                indicator.classList.remove('active');
+            }
+        });
+        
+        // Check for completed iterations (when we loop back to the first slide)
+        if (currentIndex === 0 && lastIndex === totalSlides - 1) {
+            completedIterations++;
+            console.log(`Completed iteration ${completedIterations} of ${maxIterations}`);
+            
+            // If we've reached max iterations, disable looping
+            if (completedIterations >= maxIterations) {
+                owl.trigger('destroy.owl.carousel');
+                owl.owlCarousel({
+                    center: true,
+                    items: 7,
+                    margin: 10,
+                    nav: false,
+                    dots: false,
+                    autoWidth: false,
+                    loop: false, // Disable looping after max iterations
+                    responsive: {
+                        0: { items: 1 },
+                        576: { items: 3 },
+                        768: { items: 5 },
+                        992: { items: 7 }
+                    }
+                });
+                
+                // Clear any existing intervals to stop auto-cycling
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                    slideInterval = null;
+                }
+            }
+        }
+        
+        // Remember current index for next comparison
+        lastIndex = currentIndex;
+    }
+    
+    // Next button event with improved handling
+    nextBtn.addEventListener('click', function() {
+        owl.trigger('next.owl.carousel', [300]);
+    });
+    
+    // Previous button event with improved handling
+    prevBtn.addEventListener('click', function() {
+        owl.trigger('prev.owl.carousel', [300]);
+    });
+    
+    // Handle Owl Carousel events
+    owl.on('translated.owl.carousel', function(event) {
+        // Get current active item index
+        currentIndex = event.item.index % totalSlides;
+        if (currentIndex < 0) currentIndex += totalSlides; // Handle negative index
+        updateUI();
+    });
+    
+    // Side indicators click events
+    sideIndicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', function() {
+            owl.trigger('to.owl.carousel', [index, 300]);
+        });
+    });
+    
+    // Add keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight') {
+            nextBtn.click();
+        } else if (e.key === 'ArrowLeft') {
+            prevBtn.click();
+        }
+    });
+    
+    // Initialize
+    counterTotal.textContent = formatCounter(totalSlides);
+    updateUI();
+    
+    // Add auto-cycling of slides
+    let slideInterval = setInterval(() => {
+        // Stop auto-cycling if we've reached max iterations
+        if (completedIterations >= maxIterations) {
+            clearInterval(slideInterval);
+            slideInterval = null;
+        } else {
+            nextBtn.click();
+        }
+    }, 8000);
+    
+    // Stop auto-cycling when user interacts
+    $('.carousel-wrapper').on('mouseenter', function() {
+        if (slideInterval) {
+            clearInterval(slideInterval);
+        }
+    });
+    
+    // Resume auto-cycling when mouse leaves (only if not at max iterations)
+    $('.carousel-wrapper').on('mouseleave', function() {
+        if (completedIterations < maxIterations && !slideInterval) {
+            slideInterval = setInterval(() => {
+                nextBtn.click();
+            }, 8000);
+        }
+    });
+    
+    // Make click on slide activate that slide
+    $(document).on('click', '.carousel-slide', function() {
+        const slideId = $(this).data('id') - 1;
+        owl.trigger('to.owl.carousel', [slideId, 300]);
+    });
+});
+    </script>
+</body>
+</html>
+<!-- html and js code -->
+
